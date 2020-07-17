@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,13 +34,12 @@ namespace BizTalk.Factory.XLang
 	/// A collection of <see cref="XLANGMessage"/> messages that facilitates calling of <see cref="TransformHelper"/> with
 	/// several messages from within an orchestration XLang expression shape.
 	/// </summary>
-	[Serializable]
 	[SuppressMessage("ReSharper", "CommentTypo")]
+	[Serializable]
 	public sealed class MessageCollection : LinkedList<XLANGMessage>, IDisposable
 	{
 		#region Operators
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator XmlReader(MessageCollection collection)
 		{
 			var xmlReaderSettings = new XmlReaderSettings { CloseInput = true, XmlResolver = null };
@@ -183,7 +182,6 @@ namespace BizTalk.Factory.XLang
 
 		#region IDisposable Members
 
-		[SuppressMessage("Design", "CA1063:Implement IDisposable Correctly")]
 		void IDisposable.Dispose()
 		{
 			this.Where(m => m != null).ForEach(m => m.Dispose());

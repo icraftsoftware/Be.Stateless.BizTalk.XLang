@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,14 +29,13 @@ namespace BizTalk.Factory.XLang
 	/// <summary>
 	/// Message type to use when one needs to send a text message from an orchestration.
 	/// </summary>
+	[SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
 	[CustomFormatter(typeof(StringContentFormatter))]
 	[Serializable]
-	[SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
-	public class StringMessageContent
+	public class StringMessage
 	{
 		#region Nested Type: StringContentFormatter
 
-		[SuppressMessage("Design", "CA1034:Nested types should not be visible")]
 		public class StringContentFormatter : IFormatter
 		{
 			#region IFormatter Members
@@ -59,19 +58,18 @@ namespace BizTalk.Factory.XLang
 				set => throw new NotSupportedException();
 			}
 
-			[SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope")]
 			public object Deserialize(Stream serializationStream)
 			{
 				var reader = new StreamReader(serializationStream, true);
 				var content = reader.ReadToEnd();
-				return new StringMessageContent(content);
+				return new StringMessage(content);
 			}
 
 			public void Serialize(Stream serializationStream, object graph)
 			{
 				if (serializationStream == null) throw new ArgumentNullException(nameof(serializationStream));
 				if (graph == null) throw new ArgumentNullException(nameof(graph));
-				var content = (StringMessageContent) graph;
+				var content = (StringMessage) graph;
 				var bytes = content.GetBytes();
 				serializationStream.Write(bytes, 0, bytes.Length);
 			}
@@ -83,15 +81,14 @@ namespace BizTalk.Factory.XLang
 
 		#region Operators
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
-		public static implicit operator StringMessageContent(string content)
+		public static implicit operator StringMessage(string content)
 		{
-			return new StringMessageContent(content);
+			return new(content);
 		}
 
 		#endregion
 
-		public StringMessageContent(string content)
+		public StringMessage(string content)
 		{
 			Content = content ?? throw new ArgumentNullException(nameof(content));
 		}
