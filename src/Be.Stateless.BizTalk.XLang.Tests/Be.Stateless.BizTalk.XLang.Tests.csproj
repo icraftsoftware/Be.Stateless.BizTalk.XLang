@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
-    <RootNamespace>Be.Stateless.BizTalk</RootNamespace>
+    <RootNamespace>BizTalk.Factory</RootNamespace>
     <AssemblyTitle>Be.Stateless.BizTalk.XLang.Tests</AssemblyTitle>
     <Description>Unit tests for BizTalk Factory's orchestration-centric messaging class library for general purpose BizTalk Server development.</Description>
   </PropertyGroup>
