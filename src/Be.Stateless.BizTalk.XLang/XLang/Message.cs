@@ -28,6 +28,7 @@ namespace BizTalk.Factory.XLang
 {
 	[Serializable]
 	[SuppressMessage("Design", "CA1010:Collections should implement generic interface")]
+	[SuppressMessage("Design", "CA1724:Type names should not match namespaces")]
 	public sealed class Message : BTXMessage
 	{
 		public static XLANGMessage Create(Context context, Stream content)

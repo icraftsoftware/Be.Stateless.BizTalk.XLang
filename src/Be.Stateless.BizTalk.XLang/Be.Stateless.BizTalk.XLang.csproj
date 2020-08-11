@@ -39,11 +39,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Be.Stateless.BizTalk.Abstractions" Version="2.0.20223.35222" />
-    <PackageReference Include="Be.Stateless.BizTalk.Xml" Version="2.0.20224.15485" />
-    <PackageReference Include="Be.Stateless.Common" Version="2.0.20223.38710" />
-    <PackageReference Include="Be.Stateless.Extensions" Version="2.0.20223.28518" />
-    <PackageReference Include="Be.Stateless.Xml" Version="2.0.20223.40829" />
+    <PackageReference Include="Be.Stateless.BizTalk.Abstractions" Version="2.0.20224.35195" />
+    <PackageReference Include="Be.Stateless.BizTalk.Xml" Version="2.0.20224.36566" />
+    <PackageReference Include="Be.Stateless.Common" Version="2.0.20224.34757" />
+    <PackageReference Include="Be.Stateless.Extensions" Version="2.0.20224.33378" />
+    <PackageReference Include="Be.Stateless.Xml" Version="2.0.20224.35911" />
     <PackageReference Include="BizTalk.Server.2020.Runtime" Version="1.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

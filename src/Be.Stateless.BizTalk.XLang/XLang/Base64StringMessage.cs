@@ -27,19 +27,19 @@ namespace BizTalk.Factory.XLang
 	/// </summary>
 	[CustomFormatter(typeof(StringContentFormatter))]
 	[Serializable]
-	public class Base64StringMessageContent : StringMessageContent
+	public class Base64StringMessage : StringMessage
 	{
 		#region Operators
 
 		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
-		public static implicit operator Base64StringMessageContent(string content)
+		public static implicit operator Base64StringMessage(string content)
 		{
-			return new Base64StringMessageContent(content);
+			return new Base64StringMessage(content);
 		}
 
 		#endregion
 
-		public Base64StringMessageContent(string content) : base(content) { }
+		public Base64StringMessage(string content) : base(content) { }
 
 		#region Base Class Member Overrides
 
