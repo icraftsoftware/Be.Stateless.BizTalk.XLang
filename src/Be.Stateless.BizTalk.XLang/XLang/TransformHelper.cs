@@ -151,6 +151,7 @@ namespace BizTalk.Factory.XLang
 			}
 		}
 
+		[SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
 		private static Stream Transform(XmlReader reader, Type map, System.Xml.Xsl.XsltArgumentList arguments)
 		{
 			if (_logger.IsDebugEnabled) _logger.DebugFormat("About to execute transform '{0}'.", map.AssemblyQualifiedName);
