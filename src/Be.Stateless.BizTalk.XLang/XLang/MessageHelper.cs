@@ -18,6 +18,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Xml;
+using Be.Stateless.BizTalk.ContextProperties;
+using Be.Stateless.BizTalk.Message.Extensions;
 using Microsoft.BizTalk.DefaultPipelines;
 using Microsoft.XLANGs.BaseTypes;
 using Microsoft.XLANGs.Pipeline;
@@ -28,6 +30,11 @@ namespace BizTalk.Factory.XLang
 	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public static class MessageHelper
 	{
+		public static void DisableTransportRetries(XLANGMessage message)
+		{
+			message.SetProperty(BizTalkFactoryProperties.DisableTransportRetries, true);
+		}
+
 		/// <summary>
 		/// Promotes the <see cref="BTS.MessageType"/> of an untyped &#8212;typically <see cref="XmlDocument"/>&#8212; <see
 		/// cref="XLANGMessage"/> <paramref name="message"/> from within an orchestration.
