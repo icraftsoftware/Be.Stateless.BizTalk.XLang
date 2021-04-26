@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,14 +29,13 @@ namespace BizTalk.Factory.XLang
 	/// <summary>
 	/// Message type to use when one needs to send a text message from an orchestration.
 	/// </summary>
+	[SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
 	[CustomFormatter(typeof(StringContentFormatter))]
 	[Serializable]
-	[SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
 	public class StringMessage
 	{
 		#region Nested Type: StringContentFormatter
 
-		[SuppressMessage("Design", "CA1034:Nested types should not be visible")]
 		public class StringContentFormatter : IFormatter
 		{
 			#region IFormatter Members
@@ -59,7 +58,6 @@ namespace BizTalk.Factory.XLang
 				set => throw new NotSupportedException();
 			}
 
-			[SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope")]
 			public object Deserialize(Stream serializationStream)
 			{
 				var reader = new StreamReader(serializationStream, true);
@@ -83,10 +81,9 @@ namespace BizTalk.Factory.XLang
 
 		#region Operators
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator StringMessage(string content)
 		{
-			return new StringMessage(content);
+			return new(content);
 		}
 
 		#endregion

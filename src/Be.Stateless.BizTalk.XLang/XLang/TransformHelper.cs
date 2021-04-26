@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
+using Be.Stateless.BizTalk.ContextProperties;
+using Be.Stateless.BizTalk.Message.Extensions;
 using Be.Stateless.BizTalk.Runtime.Caching;
 using Be.Stateless.Xml.Extensions;
 using Be.Stateless.Xml.Xsl;
@@ -49,12 +51,63 @@ namespace BizTalk.Factory.XLang
 	public static class TransformHelper
 	{
 		/// <summary>
-		/// Applies the XSL transformation specified by <paramref name="map"/> to the specified <paramref name="message"/>.
+		/// Applies the XSL transformation provided by the <paramref name="message"/> context's <see
+		/// cref="BizTalkFactoryProperties.MapTypeName">BizTalkFactoryProperties.MapTypeName</see> property to the specified
+		/// <paramref name="message"/>.
 		/// </summary>
+		/// <param name="message">
+		/// The <see cref="XLANGMessage"/> to be transformed.
+		/// </param>
+		/// <returns>
+		/// The transformed message with the result in the first part (at index 0).
+		/// </returns>
 		/// <remarks>
+		/// <para>
 		/// This method assumes only the first part of a multi-part <paramref name="message"/> message has to be transformed and
 		/// creates an output message with a single part named "Main".
+		/// </para>
+		/// <para>
+		/// This method will throw if the map type to apply cannot be retrieved from the message context's <see
+		/// cref="BizTalkFactoryProperties.MapTypeName">BizTalkFactoryProperties.MapTypeName</see> property.
+		/// </para>
 		/// </remarks>
+		public static XLANGMessage Transform(XLANGMessage message)
+		{
+			return Transform(message, Type.GetType(message.GetProperty(BizTalkFactoryProperties.MapTypeName), true));
+		}
+
+		/// <summary>
+		/// Applies the XSL transformation provided by the <paramref name="message"/> context's <see
+		/// cref="BizTalkFactoryProperties.MapTypeName">BizTalkFactoryProperties.MapTypeName</see> property to the specified
+		/// <paramref name="message"/>.
+		/// </summary>
+		/// <param name="message">
+		/// The <see cref="XLANGMessage"/> to be transformed.
+		/// </param>
+		/// <param name="arguments">
+		/// The arguments to pass to the XSL transformation.
+		/// </param>
+		/// <returns>
+		/// The transformed message with the result in the first part (at index 0).
+		/// </returns>
+		/// <remarks>
+		/// <para>
+		/// This method assumes only the first part of a multi-part <paramref name="message"/> message has to be transformed and
+		/// creates an output message with a single part named "Main".
+		/// </para>
+		/// <para>
+		/// This method will throw if the map type to apply cannot be retrieved from the message context's <see
+		/// cref="BizTalkFactoryProperties.MapTypeName">BizTalkFactoryProperties.MapTypeName</see> property.
+		/// </para>
+		/// </remarks>
+		public static XLANGMessage Transform(XLANGMessage message, params XsltArgument[] arguments)
+		{
+			return Transform(message, Type.GetType(message.GetProperty(BizTalkFactoryProperties.MapTypeName), true), arguments);
+		}
+
+		/// <summary>
+		/// Applies the XSL transformation specified by <paramref name="map"/> to the specified <paramref name="message"/>.
+		/// </summary>
 		/// <param name="message">
 		/// The <see cref="XLANGMessage"/> to be transformed.
 		/// </param>
@@ -64,6 +117,10 @@ namespace BizTalk.Factory.XLang
 		/// <returns>
 		/// The transformed message with the result in the first part (at index 0).
 		/// </returns>
+		/// <remarks>
+		/// This method assumes only the first part of a multi-part <paramref name="message"/> message has to be transformed and
+		/// creates an output message with a single part named "Main".
+		/// </remarks>
 		public static XLANGMessage Transform(XLANGMessage message, Type map)
 		{
 			if (message == null) throw new ArgumentNullException(nameof(message));
@@ -73,10 +130,6 @@ namespace BizTalk.Factory.XLang
 		/// <summary>
 		/// Applies the XSL transformation specified by <paramref name="map"/> to the specified <paramref name="message"/>.
 		/// </summary>
-		/// <remarks>
-		/// This method assumes only the first part of a multi-part <paramref name="message"/> message has to be transformed and
-		/// creates an output message with a single part named "Main".
-		/// </remarks>
 		/// <param name="message">
 		/// The <see cref="XLANGMessage"/> to be transformed.
 		/// </param>
@@ -89,6 +142,10 @@ namespace BizTalk.Factory.XLang
 		/// <returns>
 		/// The transformed message with the result in the first part (at index 0).
 		/// </returns>
+		/// <remarks>
+		/// This method assumes only the first part of a multi-part <paramref name="message"/> message has to be transformed and
+		/// creates an output message with a single part named "Main".
+		/// </remarks>
 		public static XLANGMessage Transform(XLANGMessage message, Type map, params XsltArgument[] arguments)
 		{
 			if (message == null) throw new ArgumentNullException(nameof(message));
@@ -98,10 +155,6 @@ namespace BizTalk.Factory.XLang
 		/// <summary>
 		/// Applies the XSL transformation specified by <paramref name="map"/> to the specified <paramref name="messages"/>.
 		/// </summary>
-		/// <remarks>
-		/// This method assumes only the first part of any multi-part <paramref name="messages"/> message has to be transformed
-		/// and creates an output message with a single part named "Main".
-		/// </remarks>
 		/// <param name="messages">
 		/// The <see cref="MessageCollection"/> to be transformed.
 		/// </param>
@@ -111,6 +164,10 @@ namespace BizTalk.Factory.XLang
 		/// <returns>
 		/// The transformed message with the result in the first part (at index 0).
 		/// </returns>
+		/// <remarks>
+		/// This method assumes only the first part of any multi-part <paramref name="messages"/> message has to be transformed
+		/// and creates an output message with a single part named "Main".
+		/// </remarks>
 		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static XLANGMessage Transform(MessageCollection messages, Type map)
 		{
