@@ -46,6 +46,7 @@ namespace BizTalk.Factory.XLang
 	/// href="http://blogs.msdn.com/b/paolos/archive/2010/04/08/how-to-boost-message-transformations-using-the-xslcompiledtransform-class-extended.aspx">How
 	/// To Boost Message Transformations Using the XslCompiledTransform class Extended</see>.
 	/// </remarks>
+	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 	public static class TransformHelper

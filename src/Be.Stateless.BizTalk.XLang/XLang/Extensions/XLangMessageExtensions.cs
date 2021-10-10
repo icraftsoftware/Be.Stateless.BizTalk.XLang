@@ -66,7 +66,7 @@ namespace BizTalk.Factory.XLang.Extensions
 			}
 			catch (Exception exception) when (!exception.IsFatal()) { }
 
-			return new XmlQNameTable(contextProperties ?? new Hashtable());
+			return new(contextProperties ?? new Hashtable());
 		}
 
 		public static string ToXml(this XmlQNameTable context)
