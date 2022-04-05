@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2021 François Chabot
+// Copyright © 2012 - 2022 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -217,7 +217,7 @@ namespace BizTalk.Factory.XLang
 			using (reader)
 			{
 				var outputStream = new VirtualStream(DEFAULT_BUFFER_SIZE, DEFAULT_THRESHOLD_SIZE);
-				var writerSettings = transformDescriptor.XslCompiledTransform.OutputSettings.Override(
+				var writerSettings = transformDescriptor.CompiledXslt.OutputSettings.Override(
 					s => {
 						s.CloseOutput = false;
 						s.Encoding = Encoding.UTF8;
@@ -226,7 +226,7 @@ namespace BizTalk.Factory.XLang
 				{
 					if (_logger.IsDebugEnabled) _logger.DebugFormat("Executing transform '{0}'.", map.AssemblyQualifiedName);
 					var xsltArguments = transformDescriptor.Arguments.Union(arguments);
-					transformDescriptor.XslCompiledTransform.Transform(reader, xsltArguments, writer);
+					transformDescriptor.CompiledXslt.Transform(reader, xsltArguments, writer);
 				}
 				outputStream.Seek(0, SeekOrigin.Begin);
 				return outputStream;
