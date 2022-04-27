@@ -33,7 +33,7 @@ using Microsoft.XLANGs.BaseTypes;
 using Microsoft.XLANGs.Core;
 using XsltArgumentList = Be.Stateless.Xml.Xsl.XsltArgumentList;
 
-namespace BizTalk.Factory.XLang
+namespace Be.Stateless.BizTalk.XLang
 {
 	/// <summary>
 	/// Helper class that allows to easily use an <see cref="XslCompiledTransform"/> from within an orchestration XLang
@@ -236,5 +236,44 @@ namespace BizTalk.Factory.XLang
 		private const int DEFAULT_BUFFER_SIZE = 10 * 1024; //10 KB
 		private const int DEFAULT_THRESHOLD_SIZE = 1024 * 1024; //1 MB
 		private static readonly ILog _logger = LogManager.GetLogger(typeof(TransformHelper));
+	}
+}
+
+namespace BizTalk.Factory.XLang
+{
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
+	[Obsolete("Use class in Be.Stateless.BizTalk.XLang instead.")]
+	public static class TransformHelper
+	{
+		public static XLANGMessage Transform(XLANGMessage message)
+		{
+			return Be.Stateless.BizTalk.XLang.TransformHelper.Transform(message);
+		}
+
+		public static XLANGMessage Transform(XLANGMessage message, params XsltArgument[] arguments)
+		{
+			return Be.Stateless.BizTalk.XLang.TransformHelper.Transform(message, arguments);
+		}
+
+		public static XLANGMessage Transform(XLANGMessage message, Type map)
+		{
+			return Be.Stateless.BizTalk.XLang.TransformHelper.Transform(message, map);
+		}
+
+		public static XLANGMessage Transform(XLANGMessage message, Type map, params XsltArgument[] arguments)
+		{
+			return Be.Stateless.BizTalk.XLang.TransformHelper.Transform(message, map, arguments);
+		}
+
+		public static XLANGMessage Transform(MessageCollection messages, Type map)
+		{
+			return Be.Stateless.BizTalk.XLang.TransformHelper.Transform(messages, map);
+		}
+
+		public static XLANGMessage Transform(MessageCollection messages, Type map, params XsltArgument[] arguments)
+		{
+			return Be.Stateless.BizTalk.XLang.TransformHelper.Transform(messages, map, arguments);
+		}
 	}
 }

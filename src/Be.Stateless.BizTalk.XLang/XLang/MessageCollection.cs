@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2021 François Chabot
+// Copyright © 2012 - 2022 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,21 +22,20 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
+using Be.Stateless.BizTalk.XLang.Extensions;
 using Be.Stateless.BizTalk.Xml;
 using Be.Stateless.Linq.Extensions;
 using Be.Stateless.Xml;
-using BizTalk.Factory.XLang.Extensions;
 using Microsoft.XLANGs.BaseTypes;
 
-namespace BizTalk.Factory.XLang
+namespace Be.Stateless.BizTalk.XLang
 {
 	/// <summary>
 	/// A collection of <see cref="XLANGMessage"/> messages that facilitates calling of <see cref="TransformHelper"/> with
 	/// several messages from within an orchestration XLang expression shape.
 	/// </summary>
-	[SuppressMessage("ReSharper", "CommentTypo")]
 	[Serializable]
-	public sealed class MessageCollection : LinkedList<XLANGMessage>, IDisposable
+	public class MessageCollection : LinkedList<XLANGMessage>, IDisposable
 	{
 		#region Operators
 
@@ -54,9 +53,9 @@ namespace BizTalk.Factory.XLang
 
 		public MessageCollection() { }
 
-		// NOTICE ctor with params XLANGMessage[], though callable in a XLang expression shape of a BTS orchestration,
-		// does not behave as expected and entails weird NullReferenceException upon Dispose(); hence the other 9 ctors
-		// public MessageCollection(params XLANGMessage[] messages) : base(messages) { }
+		// NOTICE ctor with params XLANGMessage[], though callable in a XLang expression shape of a BTS orchestration, does not
+		// behave as expected and entails weird NullReferenceException upon Dispose(); hence the other 9 constructors public
+		// MessageCollection(params XLANGMessage[] messages) : base(messages) { }
 
 		public MessageCollection(XLANGMessage message1)
 			: base(new[] { message1 })
@@ -193,5 +192,62 @@ namespace BizTalk.Factory.XLang
 		{
 			AddLast(message);
 		}
+	}
+}
+
+namespace BizTalk.Factory.XLang
+{
+	[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
+	[Obsolete("Use class in Be.Stateless.BizTalk.XLang instead.")]
+	public sealed class MessageCollection : Be.Stateless.BizTalk.XLang.MessageCollection
+	{
+		public MessageCollection(XLANGMessage message1)
+			: base(message1) { }
+
+		public MessageCollection(XLANGMessage message1, XLANGMessage message2)
+			: base(message1, message2) { }
+
+		public MessageCollection(XLANGMessage message1, XLANGMessage message2, XLANGMessage message3)
+			: base(message1, message2, message3) { }
+
+		public MessageCollection(XLANGMessage message1, XLANGMessage message2, XLANGMessage message3, XLANGMessage message4)
+			: base(message1, message2, message3, message4) { }
+
+		public MessageCollection(XLANGMessage message1, XLANGMessage message2, XLANGMessage message3, XLANGMessage message4, XLANGMessage message5)
+			: base(message1, message2, message3, message4, message5) { }
+
+		public MessageCollection(XLANGMessage message1, XLANGMessage message2, XLANGMessage message3, XLANGMessage message4, XLANGMessage message5, XLANGMessage message6)
+			: base(message1, message2, message3, message4, message5, message6) { }
+
+		public MessageCollection(
+			XLANGMessage message1,
+			XLANGMessage message2,
+			XLANGMessage message3,
+			XLANGMessage message4,
+			XLANGMessage message5,
+			XLANGMessage message6,
+			XLANGMessage message7) : base(message1, message2, message3, message4, message5, message6, message7) { }
+
+		public MessageCollection(
+			XLANGMessage message1,
+			XLANGMessage message2,
+			XLANGMessage message3,
+			XLANGMessage message4,
+			XLANGMessage message5,
+			XLANGMessage message6,
+			XLANGMessage message7,
+			XLANGMessage message8) : base(message1, message2, message3, message4, message5, message6, message7, message8) { }
+
+		public MessageCollection(
+			XLANGMessage message1,
+			XLANGMessage message2,
+			XLANGMessage message3,
+			XLANGMessage message4,
+			XLANGMessage message5,
+			XLANGMessage message6,
+			XLANGMessage message7,
+			XLANGMessage message8,
+			XLANGMessage message9) : base(message1, message2, message3, message4, message5, message6, message7, message8, message9) { }
 	}
 }

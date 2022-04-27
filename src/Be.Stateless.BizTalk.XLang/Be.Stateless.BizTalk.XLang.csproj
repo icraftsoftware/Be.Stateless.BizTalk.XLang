@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-    <RootNamespace>BizTalk.Factory</RootNamespace>
     <AssemblyName>Be.Stateless.BizTalk.XLang</AssemblyName>
     <Description>BizTalk Factory's orchestration-centric messaging class library for general purpose BizTalk Server development.</Description>
+    <RootNamespace>Be.Stateless.BizTalk</RootNamespace>
+    <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <PackageReference Include="Be.Stateless.BizTalk.Abstractions" Version="2.1.22046.40892" />
-    <PackageReference Include="Be.Stateless.BizTalk.Xml" Version="2.1.22095.23536" />
+    <PackageReference Include="Be.Stateless.BizTalk.Xml" Version="2.1.22122.30387" />
     <PackageReference Include="Be.Stateless.Extensions" Version="2.1.22025.20499" />
     <PackageReference Include="Be.Stateless.Runtime" Version="2.1.22025.21140" />
     <PackageReference Include="Be.Stateless.Xml" Version="2.1.22025.22704" />

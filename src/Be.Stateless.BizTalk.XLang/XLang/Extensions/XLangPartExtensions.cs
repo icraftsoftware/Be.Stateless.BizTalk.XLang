@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2022 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,10 +17,11 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Microsoft.XLANGs.BaseTypes;
 
-namespace BizTalk.Factory.XLang.Extensions
+namespace Be.Stateless.BizTalk.XLang.Extensions
 {
 	public static class XLangPartExtensions
 	{
@@ -28,6 +29,20 @@ namespace BizTalk.Factory.XLang.Extensions
 		{
 			if (messagePart == null) throw new ArgumentNullException(nameof(messagePart));
 			return (Stream) messagePart.RetrieveAs(typeof(Stream));
+		}
+	}
+}
+
+namespace BizTalk.Factory.XLang.Extensions
+{
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[Obsolete("Use class in Be.Stateless.BizTalk.XLang.Extensions instead.")]
+	public static class XLangPartExtensions
+	{
+		public static Stream AsStream(this XLANGPart messagePart)
+		{
+			return Be.Stateless.BizTalk.XLang.Extensions.XLangPartExtensions.AsStream(messagePart);
 		}
 	}
 }

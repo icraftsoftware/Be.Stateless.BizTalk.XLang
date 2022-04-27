@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2021 François Chabot
+// Copyright © 2012 - 2022 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ using FluentAssertions;
 using Xunit;
 using static FluentAssertions.FluentActions;
 
-namespace BizTalk.Factory.XLang
+namespace Be.Stateless.BizTalk.XLang
 {
 	public class SubOrchestrationFailedExceptionFixture
 	{
@@ -34,7 +34,7 @@ namespace BizTalk.Factory.XLang
 		}
 
 		[Fact]
-		public void SerializationRoundTrip()
+		public void SerializationRoundTrips()
 		{
 			var stream = new MemoryStream();
 			var formatter = new BinaryFormatter();

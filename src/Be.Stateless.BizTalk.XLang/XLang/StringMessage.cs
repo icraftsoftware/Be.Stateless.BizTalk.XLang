@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2021 François Chabot
+// Copyright © 2012 - 2022 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,68 +17,19 @@
 #endregion
 
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Xml.Serialization;
+using Be.Stateless.BizTalk.XLang.Serialization;
 using Microsoft.XLANGs.BaseTypes;
 
-namespace BizTalk.Factory.XLang
+namespace Be.Stateless.BizTalk.XLang
 {
 	/// <summary>
 	/// Message type to use when one needs to send a text message from an orchestration.
 	/// </summary>
-	[SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
-	[CustomFormatter(typeof(StringContentFormatter))]
+	[CustomFormatter(typeof(StringMessageFormatter))]
 	[Serializable]
 	public class StringMessage
 	{
-		#region Nested Type: StringContentFormatter
-
-		public class StringContentFormatter : IFormatter
-		{
-			#region IFormatter Members
-
-			public SerializationBinder Binder
-			{
-				get => throw new NotSupportedException();
-				set => throw new NotSupportedException();
-			}
-
-			public StreamingContext Context
-			{
-				get => throw new NotSupportedException();
-				set => throw new NotSupportedException();
-			}
-
-			public ISurrogateSelector SurrogateSelector
-			{
-				get => throw new NotSupportedException();
-				set => throw new NotSupportedException();
-			}
-
-			public object Deserialize(Stream serializationStream)
-			{
-				var reader = new StreamReader(serializationStream, true);
-				var content = reader.ReadToEnd();
-				return new StringMessage(content);
-			}
-
-			public void Serialize(Stream serializationStream, object graph)
-			{
-				if (serializationStream == null) throw new ArgumentNullException(nameof(serializationStream));
-				if (graph == null) throw new ArgumentNullException(nameof(graph));
-				var content = (StringMessage) graph;
-				var bytes = content.GetBytes();
-				serializationStream.Write(bytes, 0, bytes.Length);
-			}
-
-			#endregion
-		}
-
-		#endregion
-
 		#region Operators
 
 		public static implicit operator StringMessage(string content)
@@ -104,11 +55,29 @@ namespace BizTalk.Factory.XLang
 
 		[XmlIgnore]
 		[field: XmlIgnore]
-		protected string Content { get; }
+		public string Content { get; }
+	}
+}
 
-		protected virtual byte[] GetBytes()
+namespace BizTalk.Factory.XLang
+{
+	/// <summary>
+	/// Message type to use when one needs to send a text message from an orchestration.
+	/// </summary>
+	[Obsolete("Use class in Be.Stateless.BizTalk.XLang instead.")]
+	[CustomFormatter(typeof(StringMessageFormatter))]
+	[Serializable]
+	public class StringMessage : Be.Stateless.BizTalk.XLang.StringMessage
+	{
+		#region Operators
+
+		public static implicit operator StringMessage(string content)
 		{
-			return Encoding.UTF8.GetBytes(Content);
+			return new(content);
 		}
+
+		#endregion
+
+		public StringMessage(string content) : base(content) { }
 	}
 }

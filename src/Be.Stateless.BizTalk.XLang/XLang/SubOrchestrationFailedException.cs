@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2021 François Chabot
+// Copyright © 2012 - 2022 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 using Microsoft.BizTalk.XLANGs.BTXEngine;
 using Microsoft.XLANGs.Core;
 
-namespace BizTalk.Factory.XLang
+namespace Be.Stateless.BizTalk.XLang
 {
 	/// <summary>
 	/// In the context of BizTalk Server composite orchestrations, allows a sub-orchestration to notify its caller that it has
@@ -107,5 +107,19 @@ namespace BizTalk.Factory.XLang
 		/// </summary>
 		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 		public string Name { get; set; }
+	}
+}
+
+namespace BizTalk.Factory.XLang
+{
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[Obsolete("Use class in Be.Stateless.BizTalk.XLang instead.")]
+	public class SubOrchestrationFailedException : Be.Stateless.BizTalk.XLang.SubOrchestrationFailedException
+	{
+		public SubOrchestrationFailedException(string name, string message) : base(name, message) { }
+
+		public SubOrchestrationFailedException(string name, string message, Exception inner) : base(name, message, inner) { }
+
+		protected SubOrchestrationFailedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 	}
 }

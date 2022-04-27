@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2021 François Chabot
+// Copyright © 2012 - 2022 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ using Be.Stateless.Linq.Extensions;
 using Microsoft.XLANGs.BaseTypes;
 using Microsoft.XLANGs.Core;
 
-namespace BizTalk.Factory.XLang.Extensions
+namespace Be.Stateless.BizTalk.XLang.Extensions
 {
 	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 	public static class XLangMessageExtensions
@@ -68,6 +68,30 @@ namespace BizTalk.Factory.XLang.Extensions
 						var qn = (XmlQName) de.Key;
 						return serializeProperty(qn.Name, qn.Namespace, de.Value, false);
 					}));
+		}
+	}
+}
+
+namespace BizTalk.Factory.XLang.Extensions
+{
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[Obsolete("Use class in Be.Stateless.BizTalk.XLang.Extensions instead.")]
+	public static class XLangMessageExtensions
+	{
+		public static Stream AsStream(this XLANGMessage message)
+		{
+			return Be.Stateless.BizTalk.XLang.Extensions.XLangMessageExtensions.AsStream(message);
+		}
+
+		public static XmlQNameTable GetContext(this XLANGMessage message)
+		{
+			return Be.Stateless.BizTalk.XLang.Extensions.XLangMessageExtensions.GetContext(message);
+		}
+
+		public static string ToXml(this XmlQNameTable context)
+		{
+			return Be.Stateless.BizTalk.XLang.Extensions.XLangMessageExtensions.ToXml(context);
 		}
 	}
 }
