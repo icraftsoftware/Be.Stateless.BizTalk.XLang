@@ -23,7 +23,7 @@ using System.Text;
 
 namespace Be.Stateless.BizTalk.XLang.Serialization
 {
-	internal class StringMessageFormatter : IFormatter
+	public class StringMessageFormatter : IFormatter
 	{
 		#region IFormatter Members
 

@@ -20,7 +20,7 @@ using System;
 
 namespace Be.Stateless.BizTalk.XLang.Serialization
 {
-	internal class Base64StringMessageFormatter : StringMessageFormatter
+	public class Base64StringMessageFormatter : StringMessageFormatter
 	{
 		#region Base Class Member Overrides
 

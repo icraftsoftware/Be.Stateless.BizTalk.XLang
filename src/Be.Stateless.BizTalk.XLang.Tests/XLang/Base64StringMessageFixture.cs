@@ -75,6 +75,7 @@ namespace Be.Stateless.BizTalk.XLang
 
 namespace BizTalk.Factory.XLang
 {
+#pragma warning disable CS0618
 	public class Base64StringMessageFixture
 	{
 		[Fact]
@@ -125,4 +126,5 @@ namespace BizTalk.Factory.XLang
 		private static readonly string _content = typeof(Base64StringMessageFixture).FullName;
 		private static readonly string _base64Content = Convert.ToBase64String(Encoding.UTF8.GetBytes(_content));
 	}
+#pragma warning restore CS0618
 }

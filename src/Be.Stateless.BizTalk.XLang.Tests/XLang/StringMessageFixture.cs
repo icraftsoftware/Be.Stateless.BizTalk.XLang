@@ -66,6 +66,7 @@ namespace Be.Stateless.BizTalk.XLang
 
 namespace BizTalk.Factory.XLang
 {
+#pragma warning disable CS0618
 	public class StringMessageFixture
 	{
 		[Fact]
@@ -109,4 +110,5 @@ namespace BizTalk.Factory.XLang
 
 		private static readonly string _content = typeof(StringMessageFixture).FullName;
 	}
+#pragma warning restore CS0618
 }
