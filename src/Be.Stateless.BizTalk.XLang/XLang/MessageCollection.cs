@@ -202,6 +202,8 @@ namespace BizTalk.Factory.XLang
 	[Obsolete("Use class in Be.Stateless.BizTalk.XLang instead.")]
 	public sealed class MessageCollection : Be.Stateless.BizTalk.XLang.MessageCollection
 	{
+		public MessageCollection() { }
+
 		public MessageCollection(XLANGMessage message1)
 			: base(message1) { }
 

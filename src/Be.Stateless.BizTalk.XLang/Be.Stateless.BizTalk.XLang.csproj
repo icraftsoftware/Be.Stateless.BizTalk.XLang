@@ -42,7 +42,7 @@
     <PackageReference Include="Be.Stateless.Extensions" Version="2.1.22025.20499" />
     <PackageReference Include="Be.Stateless.Runtime" Version="2.1.22025.21140" />
     <PackageReference Include="Be.Stateless.Xml" Version="2.1.22025.22704" />
-    <PackageReference Include="BizTalk.Server.2020.Runtime" Version="1.0.3">
+    <PackageReference Include="BizTalk.Server.2020.Runtime" Version="1.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
