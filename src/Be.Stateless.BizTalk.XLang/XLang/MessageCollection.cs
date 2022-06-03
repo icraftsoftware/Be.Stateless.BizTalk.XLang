@@ -202,6 +202,15 @@ namespace BizTalk.Factory.XLang
 	[Obsolete("Use class in Be.Stateless.BizTalk.XLang instead.")]
 	public sealed class MessageCollection : Be.Stateless.BizTalk.XLang.MessageCollection
 	{
+		#region Operators
+
+		public static implicit operator XmlReader(MessageCollection collection)
+		{
+			return (Be.Stateless.BizTalk.XLang.MessageCollection) collection;
+		}
+
+		#endregion
+
 		public MessageCollection() { }
 
 		public MessageCollection(XLANGMessage message1)
