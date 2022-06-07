@@ -112,8 +112,8 @@ namespace Be.Stateless.BizTalk.XLang
 
 namespace BizTalk.Factory.XLang
 {
-	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	[Obsolete("Use class in Be.Stateless.BizTalk.XLang instead.")]
+	[Serializable]
 	public class SubOrchestrationFailedException : Be.Stateless.BizTalk.XLang.SubOrchestrationFailedException
 	{
 		public SubOrchestrationFailedException(string name, string message) : base(name, message) { }

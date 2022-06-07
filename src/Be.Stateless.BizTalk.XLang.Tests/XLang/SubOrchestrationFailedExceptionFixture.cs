@@ -60,3 +60,44 @@ namespace Be.Stateless.BizTalk.XLang
 		}
 	}
 }
+
+namespace BizTalk.Factory.XLang
+{
+#pragma warning disable CS0618
+	public class SubOrchestrationFailedExceptionFixture
+	{
+		[Fact]
+		public void Message()
+		{
+			Invoking(() => throw new SubOrchestrationFailedException("process", "Can't proceed."))
+				.Should().Throw<SubOrchestrationFailedException>().WithMessage("Orchestration 'process' failed. Can't proceed.");
+		}
+
+		[Fact]
+		public void SerializationRoundTrips()
+		{
+			var stream = new MemoryStream();
+			var formatter = new BinaryFormatter();
+
+			var originalException = Invoking(() => throw new SubOrchestrationFailedException("process", "Can't proceed."))
+				.Should().Throw<SubOrchestrationFailedException>()
+				.Which;
+			formatter.Serialize(stream, originalException);
+			stream.Position = 0;
+			var deserializedException = (SubOrchestrationFailedException) formatter.Deserialize(stream);
+
+			deserializedException.Should().NotBeSameAs(originalException);
+			deserializedException.Name.Should().Be(originalException.Name);
+			deserializedException.ToString().Should().Be(originalException.ToString());
+		}
+
+		[Fact]
+		public void ToStringSerialization()
+		{
+			Invoking(() => throw new SubOrchestrationFailedException("process", "Can't proceed."))
+				.Should().Throw<SubOrchestrationFailedException>()
+				.Which.ToString().Should().StartWith($"{typeof(SubOrchestrationFailedException).FullName}: Orchestration 'process' failed. Can't proceed.");
+		}
+	}
+#pragma warning restore CS0618
+}
